@@ -1,0 +1,89 @@
+﻿@using FactorioPixelArt.Controls.Overlay
+@using FactorioPixelArt.Services
+@using Microsoft.AspNetCore.Components.Forms
+
+@page "/"
+@attribute [NavigationPage("Factorio Pixelart", icon: "event_note", sort: 0)]
+
+@implements IDisposable
+
+@inject IJSRuntime JS
+@inject IClipboardService Clipboard
+@inject ILogger<Index> Log
+@inject SimpleStorage<Model.Configuration> Configuration
+@inject IOverlayService OverlayService
+@inject NotificationService NotificationService
+
+<script>
+  window.setImage = async (imageElementId, imageStream) => {
+    const image = document.getElementById(imageElementId);
+    if (!imageStream) {
+        image.src = '';
+      return;  
+    }
+    const arrayBuffer = await imageStream.arrayBuffer();
+    const blob = new Blob([arrayBuffer]);
+    const url = URL.createObjectURL(blob);
+    image.onload = () => {
+      URL.revokeObjectURL(url);
+    }
+    image.src = url;
+  }
+</script>
+
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Image upload</RadzenText>
+    <InputFile OnChange="@Upload_And_Render_Image" accept="image/*" />
+    <div style="margin-top: 0.5rem;">
+        <img id="myImage" />
+    </div>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3" Style="margin-top: 0.5rem;">Blueprint</RadzenText>
+    <RadzenTextArea Value="@_blueprint" Style="width: 100%;" aria-label="TextArea" Rows="15"/>
+    <div style="margin-top: 0.5rem;">
+        <RadzenButton Icon="content_copy" Text="Copy" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(async () => await Clipboard.CopyToClipboard(_blueprint))"/>
+    </div>
+    
+</RadzenCard>
+
+@code
+{
+    private string _blueprint = string.Empty;
+    
+    public async Task Upload_And_Render_Image(InputFileChangeEventArgs e)
+    {
+        Log.LogInformation("Begin generating.");
+
+        try
+        {
+            Stream ms1 = new MemoryStream();
+            await e.File.OpenReadStream().CopyToAsync(ms1);
+            ms1.Position = 0;
+            var dotnetImageStream = new DotNetStreamReference(ms1);
+            await JS.InvokeVoidAsync("setImage", "myImage", dotnetImageStream);
+            
+            NotificationService.Notify(severity: NotificationSeverity.Info, summary: "Blueprint generation started", detail: "The browser might hang a little.");
+            await Task.Delay(1000);
+             
+            Stream ms = new MemoryStream();
+            await e.File.OpenReadStream().CopyToAsync(ms);
+            ms.Seek(0, SeekOrigin.Begin);
+            _blueprint = PixelartBlueprintGenerator.GeneratePixelartBlueprint(ms);
+            NotificationService.Notify(severity: NotificationSeverity.Success, summary: "Blueprint generated.");
+        }
+        catch (Exception ex)
+        {
+            _blueprint = string.Empty;
+            NotificationService.Notify(severity: NotificationSeverity.Error, summary: "Generation failed.", detail: ex.Message);
+            await JS.InvokeVoidAsync("setImage", "myImage", null);
+            Log.LogError(ex, "Unable to generate Blueprint.");
+            throw;
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+    }
+}
