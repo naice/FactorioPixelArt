@@ -1,15 +1,15 @@
 {
   "mainAssemblyName": "FactorioPixelArt",
   "resources": {
-    "hash": "sha256-eheAdADKBUDq0cDpV5bgUci4xxl9J2WhhhEieyHycEc=",
+    "hash": "sha256-UnRwuUPVJHiuqhxBnRqD8V86xQesRQShtZ3PlPiOBUo=",
     "jsModuleNative": {
-      "dotnet.native.8.0.10.0vefyrvdd2.js": "sha256-S5uMqJ3YypXVUpqFd3UACqDRQPaMS67U7dXH2itG8aY="
+      "dotnet.native.8.0.10.4xsnm8lwn6.js": "sha256-QVxMlY7ohmjgde/bZMA0dlWDAeuUP+tEfkiSdg4DFcE="
     },
     "jsModuleRuntime": {
-      "dotnet.runtime.8.0.10.1v4nyb1010.js": "sha256-FjrgL9dY6dc2yUoXDWowSfachSgM8O29qUMWDQOJKRI="
+      "dotnet.runtime.8.0.10.a2v1j2tzpw.js": "sha256-FjrgL9dY6dc2yUoXDWowSfachSgM8O29qUMWDQOJKRI="
     },
     "wasmNative": {
-      "dotnet.native.wasm": "sha256-rHW8TupaOfvcrLWwmRDaUO00HkdiRjwN9qdqDja1ZoE="
+      "dotnet.native.wasm": "sha256-4ymhDbG5daKbi9yL1L574jRRiFFQhiOrDJU5YAYALU4="
     },
     "icu": {
       "icudt_CJK.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -19,7 +19,7 @@
     "assembly": {
       "Blazored.LocalStorage.wasm": "sha256-xHBGFCMjDjvvTwtMvgaMBNmQk9JdVhGmws2/GMZlxrI=",
       "ByteSize.wasm": "sha256-HNfYKaBs4Y78N5uykAcpIGadMyoV6FKcqYzB7fMOQ4o=",
-      "FactorioPixelArt.wasm": "sha256-deUiH6KN7nk0tOgDCWZzu3eAZ5mI3V314gDZJup9G6E=",
+      "FactorioPixelArt.wasm": "sha256-F0Obo4f8CnphT5IK+RSeZuiwcbvlmIBsLgFmYmTBaiM=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-HbtTz7tHi6f5g3WMfJFnXZChZj2DYpqWas3pr1Usy5U=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-Lzww4MKFeAPcvbDZJvKb9RrTpgzyipmLlZ29P7yNEio=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-MIVCJ7zccvm5vIK+HzKlqxWV0bQgzBzPUFGpr/e9xXc=",
