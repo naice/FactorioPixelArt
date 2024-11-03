@@ -1,0 +1,43 @@
+/* /Controls/Overlay/OverlayHost.razor.rz.scp.css */
+/* /MainLayout.razor.rz.scp.css */
+.layout-header[b-4zqw2k4s18] {
+    height: var(--layout-header-height, 50px);
+}
+.layout-footer[b-4zqw2k4s18] {
+    height: var(--layout-footer-height, 50px);
+}
+/* /Pages/Index.razor.rz.scp.css */
+table[b-k5hlbc0bjc] {
+    border-collapse: collapse;
+    margin: 1em;
+  }
+th[b-k5hlbc0bjc] {
+  border-bottom: 1px solid var(--rz-base-500);
+  color: var(--rz-info-darker);
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: right;
+  text-wrap: nowrap;
+}
+td[b-k5hlbc0bjc] {
+  color: var(--rz-text-color);
+  padding: 0.65em 1em;
+  text-wrap: nowrap;
+  text-align: right;
+}
+.today[b-k5hlbc0bjc] {
+  background: var(--rz-info-lighter);
+}
+.copy[b-k5hlbc0bjc] {
+  cursor: pointer
+}
+.underDue[b-k5hlbc0bjc] {
+  color: var(--rz-danger);
+}
+.overDue[b-k5hlbc0bjc] {
+  color: var(--rz-warning);  
+}
+.onDue[b-k5hlbc0bjc] {
+  color: var(--rz-success);  
+}
