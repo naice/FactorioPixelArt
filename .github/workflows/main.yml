@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # uses GitHub's checkout action to checkout code form the master branch
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     # sets up .NET Core SDK
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3.2.0
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.0
-
+        dotnet-version: 8.0.x
+          
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
       run: dotnet publish FactorioPixelArt.csproj -c Release -o release --nologo
@@ -30,17 +30,13 @@ jobs:
     # copy index.html to 404.html to serve the same file when a file is not found
     - name: copy index.html to 404.html
       run: cp release/wwwroot/index.html release/wwwroot/404.html
-
+    
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
+
     - name: GitHub Pages
-      # You may pin to the exact commit or the version.
-      # uses: crazy-max/ghaction-github-pages@c05ee637ec73429400a359430db8e5629f3f2564
-      uses: crazy-max/ghaction-github-pages@v4.0.0
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        build_dir: release/wwwroot
-        # Allow Jekyll to build your site
-        jekyll: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: release/wwwroot
